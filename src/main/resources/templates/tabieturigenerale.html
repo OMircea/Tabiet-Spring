@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Tabieturi</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<button onclick="location.href='/'" type="button">
+    Logout</button>
+<br>
+<button onclick="location.href='/index'" type="button">
+    Index</button>
+<h1>Sugestii de tabieturi: </h1>
+
+<table border="1">
+    <tr>
+        <th>descriere</th>
+        <th>nr_zile</th>
+
+    </tr>
+    <tr th:each = "tabietgen: ${tabieturigen}">
+        <td th:text="${tabietgen.descriere}"></td>
+        <td th:text="${tabietgen.nr_zile}"></td>
+        <td>
+                <form action="#" th:action="@{/tabieturigenerale}" th:object="${tabiet}" method ="post">
+                    <input type="hidden"  th:value="${tabietgen.idTG}" th:name="idTG" th:id="idTG" />
+                    <input type="hidden"  th:value="${tabietgen.descriere}" th:name="descriere" th:id="descriere"  />
+                    <input type="hidden"  th:value="${tabietgen.nr_zile}" th:name="nr_zile" th:id="nr_zile" />
+                    <input type="submit" value="Adauga!" class="btn btn-danger" />
+                </form>
+
+        </td>
+
+    </tr>
+</table>
+
+</body>
+</html>

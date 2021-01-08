@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Tabieturi</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<button onclick="location.href='/'" type="button">
+    Logout</button>
+<br>
+<button onclick="location.href='/index'" type="button">
+    Index</button>
+<h1>Tabieturile tale: </h1>
+
+<table border="1">
+    <tr>
+        <th>descriere</th>
+        <th>nr_zile</th>
+        <th>zile_ramase</th>
+
+    </tr>
+    <tr th:each = "tabiet: ${tabieturi}">
+        <td th:text="${tabiet.descriere}"></td>
+        <td th:text="${tabiet.nr_zile}"></td>
+        <td th:text="${tabiet.zile_ramase}"></td>
+        <td>
+            <form action="#" th:action="@{/statusuritabiet}"  method ="get">
+                <input type="hidden" name="id" th:value="${tabiet.id}" />
+                <input type="submit" value="Vezi istoric statusuri." class="btn btn-danger" />
+            </form>
+        </td>
+        <td>
+
+            <div th:if="${tabiet.ultima_indeplinire == azi}">
+
+                <form action="#" th:action="@{/addstatus}" th:object="${status}" method ="post">
+                    <input type="text" th:name="descriere_status" th:id="descriere_status" />
+                    <input type="hidden" th:value="${tabiet.id}" th:name="idT" th:id="idT" />
+                    <input type="hidden" th:value="${tabiet.nr_zile}-${tabiet.zile_ramase}" th:name="zi" th:id="zi" />
+                    <input type="submit" value="Adauga status!" class="btn btn-danger" />
+                </form>
+
+            </div>
+
+            <div th:unless="${tabiet.ultima_indeplinire == azi}">
+
+                <form action="#" th:action="@{/tabieturiuser}"  method ="post">
+                    <input type="hidden" name="id" th:value="${tabiet.id}" />
+                    <input type="submit" value="Am facut!" class="btn btn-danger" />
+                </form>
+
+            </div>
+
+        </td>
+
+    </tr>
+</table>
+
+</body>
+</html>

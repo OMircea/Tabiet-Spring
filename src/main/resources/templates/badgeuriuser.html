@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Tabieturi</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<button onclick="location.href='/'" type="button">
+    Logout</button>
+<br>
+<button onclick="location.href='/index'" type="button">
+    Index</button>
+<h1>Badgeurile tale: </h1>
+
+<table border="1">
+    <tr>
+        <th>Badgeuri obtinute</th>
+
+    </tr>
+    <tr th:each = "zi_desc: ${zi_descs}">
+
+
+        <td th:inline="text">Felicitari ai obtinut badgeul de <b th:text="${zi_desc.zile}"></b> zile pentru tabietul tau numit <b th:text="${zi_desc.descriere}"></b></td>
+
+    </tr>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Tabieturi</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<button onclick="location.href='/'" type="button">
+    Logout</button>
+<br>
+<button onclick="location.href='/index'" type="button">
+    Index</button>
+<h1>Tabieturile tale: </h1>
+
+<table border="1" class="table table-responsive">
+    <tr>
+        <th>descriere</th>
+        <th>nr_zile</th>
+        <th>zile_ramase</th>
+        <th>sterge?</th>
+
+    </tr>
+    <tr th:each = "tabiet: ${tabieturi}">
+        <td th:text="${tabiet.descriere}"></td>
+        <td th:text="${tabiet.nr_zile}"></td>
+        <td th:text="${tabiet.zile_ramase}"></td>
+        <td>
+            <form action="#" th:action="@{/stergeretabiet}"  method ="post">
+                <input type="hidden" name="id" th:value="${tabiet.id}" />
+                <input type="submit" value="Delete" class="btn btn-danger" />
+            </form>
+        </td>
+
+    </tr>
+</table>
+
+</body>
+</html>
